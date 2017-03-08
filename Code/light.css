@@ -98,3 +98,9 @@ body
     margin-right: auto;
     display: inline-block;
 }
+
+#account
+{
+    top: 20px;
+    right: 20px;
+}
