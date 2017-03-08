@@ -1,0 +1,65 @@
+<!-- Declares the doctype as html -->
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <!-- Links the CSS file -->
+    <link type="text/css" rel="stylesheet" href="light.css"/>
+
+    <!-- Sets the webpage title -->
+    <title>Neptune Project</title>
+
+    <script>
+        function changeCSS(cssFile, cssLinkIndex) {
+
+            var oldlink = document.getElementsByTagName("link").item(cssLinkIndex);
+
+            var newlink = document.createElement("link");
+            newlink.setAttribute("rel", "stylesheet");
+            newlink.setAttribute("type", "text/css");
+            newlink.setAttribute("href", cssFile);
+
+            document.getElementsByTagName("head").item(0).replaceChild(newlink, oldlink);
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <!-- Header -->
+    <div id="header">
+        <img src="images/Logo.png"/>
+    </div>
+
+    <!-- Main content div -->
+    <div id="main">
+
+        <div id="ui">
+            <button onclick="changeCSS('dark.css', 0)">Dark UI</button>
+            <button onclick="changeCSS('light.css', 0)">Light UI</button>
+        </div>
+
+        <h1>Instruction Generator</h1>
+
+        <p>
+            How To Use <br>
+            1. <br>
+            2. <br>
+            3. <br>
+            4. <br>
+            5. <br>
+        </p>
+
+        <div id="upload">
+            <h3>Upload File</h3>
+            <input type="file" />
+        </div>
+
+    </div>
+
+</body>
+
+</html>

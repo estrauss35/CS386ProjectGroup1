@@ -1,0 +1,77 @@
+/*
+ * Light blue: #B8EEF1
+ * Gray:       #8C8C8C
+ * Black:      #000000
+ * White:      #FFFFFF
+ */
+
+/* Body Structure */
+body
+{
+
+    margin: 0 auto;
+
+}
+
+/* Header Content */
+#header
+{
+
+    width: 100%;
+    height: 10vh;
+    background-color: #B8EEF1;
+
+}
+
+#header img
+{
+
+    height: 10vh;
+
+}
+
+/* Main Content */
+#main
+{
+
+    width: 100%;
+    height: 90vh;
+    background-color: #FFFFFF;
+    overflow: auto;
+}
+
+#main h1
+{
+
+    text-align: center;
+    color: #8C8C8C;
+
+}
+
+#main p
+{
+
+    padding-right: 15%;
+    padding-left: 15%;
+    color: #8C8C8C;
+
+}
+
+#upload
+{
+    text-align: center;
+}
+
+#upload input
+{
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-block;
+}
+
+#ui
+{
+    margin-left: 5%;
+    margin-top: 10%;
+    display: inline-block;
+}
