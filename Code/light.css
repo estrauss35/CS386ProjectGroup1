@@ -75,3 +75,26 @@ body
     margin-top: 10%;
     display: inline-block;
 }
+
+#download
+{
+    text-align: center;
+}
+
+#download input
+{
+    margin-right: auto;
+    display: inline-block;
+}
+
+#hardware
+{
+    text-align: center;
+}
+
+#hardware input
+{
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-block;
+}
