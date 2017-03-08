@@ -65,7 +65,6 @@ body
 
 #upload input
 {
-    margin-left: auto;
     margin-right: auto;
     display: inline-block;
 }
@@ -74,5 +73,31 @@ body
 {
     margin-left: 5%;
     margin-top: 10%;
+    display: inline-block;
+}
+
+#download
+{
+    color: #FFFFFF;
+    text-align: center;
+}
+
+#download input
+{
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-block;
+}
+
+#hardware
+{
+    color: #FFFFFF;
+    text-align: center;
+}
+
+#hardware input
+{
+    margin-left: auto;
+    margin-right: auto;
     display: inline-block;
 }

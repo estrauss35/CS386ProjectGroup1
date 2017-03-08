@@ -53,9 +53,20 @@
             5. <br>
         </p>
 
+        <form action="" id="hardware">
+            <input type="radio" name="hardware" value="A"> Hardware A<br>
+            <input type="radio" name="hardware" value="B"> Hardware B<br>
+            <input type="radio" name="hardware" value="C"> Hardware C
+        </form>
+
         <div id="upload">
             <h3>Upload File</h3>
-            <input type="file" />
+            <input type="file" accept=".inst*"/>
+        </div>
+
+        <div id="download">
+            <h3>Download File</h3>
+            <a href="sample.inst" download="sample"><button onclick="">Download</button></a>
         </div>
 
     </div>
