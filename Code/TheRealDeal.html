@@ -1,0 +1,261 @@
+<!-- Declare the document type as HTML -->
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <!-- Link the CSS -->
+    <link type="text/css" rel="stylesheet", href="TheRealDeal.css"/>
+
+    <!-- Set the webpage title -->
+    <title>Neptune Project</title>
+
+</head>
+
+<body>
+
+    <!-- Header bar -->
+    <div id="header">
+
+        <img src="images/Logo.png"/>
+
+    </div>
+
+    <!-- Main content body -->
+    <div id="main">
+
+        <h1>Instruction Generator</h1>
+
+        <p id="hardwareMenu"></p>
+
+        <p id="conditionMenu"></p>
+
+        <p id="conditionInput"></p>
+
+        <p id="actionMenu"></p>
+
+        <p id="actionInput"></p>
+
+        <button>Submit</button>
+
+        <script>
+
+            // The JSON data. Embedding it in the scripts as of right now
+            // because I have not figured out how to link it as its own file.
+            var JSONtext =
+            [{
+                "Name":"Hardware_1",
+                "Conditions":
+                [
+                    {
+                        "Name":"HW_1_Condition_1",
+                        "Inputs":
+                        {
+                            "Hours":"INT",
+                            "Minutes":"INT",
+                            "Seconds":"INT"
+                        }
+                    },
+                    {
+                        "Name":"HW_1_Condition_2",
+                        "Inputs":
+                        {
+                            "Size":"INT",
+                            "Weight":"INT"
+                        }
+                    }
+                ],
+                "Actions":
+                [
+                    {
+                        "Name":"Heat To",
+                        "Inputs":
+                        {
+                            "Temp":"INT"
+                        }
+                    },
+                    {
+                        "Name":"Heat For",
+                        "Inputs":
+                        {
+                            "Temp":"INT",
+                            "Seconds":"INT"
+                        }
+                    },
+                    {
+                        "Name":"Heat Cycle",
+                        "Inputs":
+                        {
+                            "Temp1":"INT",
+                            "Temp2":"INT",
+                            "Seconds":"INT"
+                        }
+                    }
+                ]
+            },
+            {
+                "Name":"Hardware_2",
+                "Conditions":
+                [
+                    {
+                        "Name":"HW_2_Condition_1",
+                        "Inputs":
+                        {
+                            "Hours":"INT",
+                            "Minutes":"INT",
+                            "Seconds":"INT"
+                        }
+                    },
+                    {
+                        "Name":"HW_2_Condition_2",
+                        "Inputs":
+                        {
+                            "Size":"INT",
+                            "Weight":"INT"
+                        }
+                    },
+                    {
+                        "Name":"HW_2_Condition_3",
+                        "Inputs":
+                        {
+                            "Seconds":"INT"
+                        }
+                    }
+                ],
+                "Actions":
+                [
+                    {
+                        "Name":"Cool To",
+                        "Inputs":
+                        {
+                            "Temp":"INT"
+                        }
+                    },
+                    {
+                        "Name":"Cool For",
+                        "Inputs":
+                        {
+                            "Temp":"INT",
+                            "Seconds":"INT"
+                        }
+                    }
+                ]
+            }];
+
+            // Variables for the hardware menu selection tag, and a loop counter
+            var harSelect = "";
+            var count;
+
+            // Open the select tag for hardware selection
+            harSelect += "<select id=\"hardwareSelect\" onchange=\"getConditionsAndActions('hardwareSelect')\">";
+            harSelect += "<option selected disabled hidden style='display: none' value=''></option>";
+
+            // Populate the select tag with hardware in the JSON file
+            for (count = 0; count < JSONtext.length; count++)
+            {
+                harSelect += "<option>";
+                harSelect += JSONtext[count].Name;
+                harSelect += "</option>";
+            }
+
+            // Close the select tag
+            harSelect += "</select>";
+
+            // Set the HTML element to our select tag
+            document.getElementById("hardwareMenu").innerHTML = harSelect;
+
+            function getConditionsAndActions(hardwareSelect)
+            {
+
+                // Variable for the text of the selected option
+                var e = document.getElementById(hardwareSelect);
+                var selectedValue = e.options[e.selectedIndex].text;
+
+                // Variable for the condition menu selection tag and action menu
+                // selection tag
+                var conSelect = "";
+                var actSelect = "";
+
+                // Find the index of the hardware selection in the menu
+                var index;
+
+                for (count = 0; count < JSONtext.length; count++)
+                {
+                    if (JSONtext[count].Name == selectedValue)
+                    {
+                        index = count;
+                    }
+                }
+
+                // Open the select tag for the condition selection
+                conSelect += "<select id=\"conditionSelect\" onchange=\"getConditionInputs('conditionSelect')\">";
+                conSelect += "<option select disabled hidden style='display: none' value=''></option>";
+
+                // At the specified index in the JSON file, populate the
+                // condition select tag with the conditions
+                for (count = 0; count < JSONtext[index].Conditions.length; count++)
+                {
+                    conSelect += "<option>";
+                    conSelect += JSONtext[index].Conditions[count].Name;
+                    conSelect += "</option>";
+                }
+
+                // Close the select tag
+                conSelect += "</select>";
+
+                // Open the select tag for the action selection
+                actSelect += "<select id=\"actionSelect\" onchange=\"getActionInputs('actionSelect')\">";
+                actSelect += "<option select disabled hidden style='display: none' value=''></option>";
+
+                // At the specified index in the JSON file, populate the action
+                // select tag with the actions
+                for (count = 0; count < JSONtext[index].Actions.length; count++)
+                {
+                    actSelect += "<option>";
+                    actSelect += JSONtext[index].Actions[count].Name;
+                    actSelect += "</option>";
+                }
+
+                // Close the select tag
+                actSelect += "</select>";
+
+                // Set the HTML elements to our selection tags
+                document.getElementById("conditionMenu").innerHTML = conSelect;
+                document.getElementById("actionMenu").innerHTML = actSelect;
+
+            }
+
+            // NOT FINISHED
+            function getConditionInputs(conditionSelect)
+            {
+
+                var e = document.getElementById(conditionSelect);
+                var selectedValue = e.options[e.selectedIndex].text;
+
+                var conInput = "";
+
+                document.getElementById("conditionInput").innerHTML = conInput;
+
+            }
+
+            // NOT FINISHED
+            function getActionInputs(actionSelect)
+            {
+
+                var e = document.getElementById(actionSelect);
+                var selectedValue = e.options[e.selectedIndex].text;
+
+                var actInput = "";
+
+                document.getElementById("actionInput").innerHTML = actInput;
+
+            }
+
+        </script>
+
+    </div>
+
+</body>
+
+</html>
