@@ -1,0 +1,8 @@
+Todo
+
+ - Make it not look so ugly
+ - Make it so that integer inputs can not be lower than zero
+ - Find a way to link the JSON file so it does not have to be embedded
+ - Add an "Add" button for committing an action to the instruction set
+ - Have the "Add" button clear inputs when it is clicked
+ - Thorough testing for bugs or inconsistencies
