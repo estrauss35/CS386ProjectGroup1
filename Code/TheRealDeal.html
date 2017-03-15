@@ -65,6 +65,14 @@
                             "Size":"INT",
                             "Weight":"INT"
                         }
+                    },
+                    {
+                        "Name":"HW_1_Condition_3",
+                        "Inputs":
+                        {
+                            "Float Weight":"FLOAT",
+                            "String Text":"STRING"
+                        }
                     }
                 ],
                 "Actions":
@@ -139,6 +147,15 @@
                         {
                             "Temp":"INT",
                             "Seconds":"INT"
+                        }
+                    },
+                    {
+                        "Name":"Test Inputs",
+                        "Inputs":
+                        {
+                            "Int Input":"INT",
+                            "Float Input":"FLOAT",
+                            "Text Input":"STRING"
                         }
                     }
                 ]
@@ -287,9 +304,27 @@
                 // Add each input to the form
                 for (var key in JSONtext[index1].Conditions[index2].Inputs)
                 {
+
+                    // Add the key name
                     conInput += key
-                    conInput += "<input type=\"number\">";
+
+                    // Check the input type and open the tag accordingly
+                    if (JSONtext[index1].Conditions[index2].Inputs[key] == "INT")
+                    {
+                        conInput += "<input type=\"number\"/>";
+                    }
+                    else if (JSONtext[index1].Conditions[index2].Inputs[key] == "FLOAT")
+                    {
+                        conInput += "<input type=\"number\" step=\"0.01\"/>";
+                    }
+                    else
+                    {
+                        conInput += "<input type=\"text\"/>";
+                    }
+
+                    // Add a line break before the next input
                     conInput += "<br>";
+
                 }
 
                 // Close the form tag
@@ -339,9 +374,27 @@
                 // Add each input to the form
                 for (var key in JSONtext[index1].Actions[index2].Inputs)
                 {
+
+                    // Add the key name
                     actInput += key
-                    actInput += "<input type=\"number\">";
+
+                    // Check the input type and open the tag accordingly
+                    if (JSONtext[index1].Actions[index2].Inputs[key] == "INT")
+                    {
+                        actInput += "<input type=\"number\"/>";
+                    }
+                    else if (JSONtext[index1].Actions[index2].Inputs[key] == "FLOAT")
+                    {
+                        actInput += "<input type=\"number\" step=\"0.01\"/>";
+                    }
+                    else
+                    {
+                        actInput += "<input type=\"text\"/>";
+                    }
+
+                    // Add a line break before the next input
                     actInput += "<br>";
+
                 }
 
                 // Close the form tag
