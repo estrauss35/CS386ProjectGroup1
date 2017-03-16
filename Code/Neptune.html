@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <link type="text/css" rel="stylesheet", href="Neptune.css"/>
+
+    <title>Vulcan Scheduler</title>
+
+</head>
+
+<body>
+
+    <div id="header">
+
+        <img src="images/Logo.png"/>
+
+    </div>
+
+    <div id="main">
+
+        <h1>Vulcan Scheduler</h1>
+
+        <p id="body"></p>
+
+        <button onclick="newIns()">Add New Instruction</button>
+
+        <br>
+        <br>
+
+        <button>Submit</button>
+
+    </div>
+
+        <script>
+
+            var insNum = 0;
+
+            // No clue how this whole thing works, but it loads the json file
+            var JSONtext;
+
+            loadJSON(function(response) {
+                JSONtext = JSON.parse(response);
+            });
+
+            function loadJSON(callback) {
+
+                var xobj = new XMLHttpRequest();
+                    xobj.overrideMimeType("application/json");
+                xobj.open('GET', 'Hardware.json', true); // Replace 'my_data' with the path to your file
+                xobj.onreadystatechange = function () {
+                      if (xobj.readyState == 4 && xobj.status == "200") {
+                        // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+                        callback(xobj.responseText);
+                      }
+                };
+                xobj.send(null);
+            }
+
+            // Code I actually wrote
+            function newIns()
+            {
+
+                var newTag = "";
+
+                insNum++;
+
+                newTag += "<h3>Instruction " + insNum + "</h3>";
+
+                newTag += "<p id=\"conHar" + insNum + "\" num=\"" + insNum + "\"></p>";
+                newTag += "<p id=\"conCon" + insNum + "\" num=\"" + insNum + "\"></p>";
+                newTag += "<p id=\"conInp" + insNum + "\" num=\"" + insNum + "\"></p>";
+
+                newTag += "<p id=\"actHar" + insNum + "\" num=\"" + insNum + "\"></p>";
+                newTag += "<p id=\"actCon" + insNum + "\" num=\"" + insNum + "\"></p>";
+                newTag += "<p id=\"actInp" + insNum + "\" num=\"" + insNum + "\"></p>";
+
+                newTag += "<p>==========</p>";
+
+                document.getElementById("body").innerHTML += newTag;
+
+                conHar(insNum);
+                actHar(insNum);
+
+            }
+
+            function conHar(num)
+            {
+
+                var conHar = document.getElementById("conHar" + num);
+                var newTag = "";
+                var count;
+
+                newTag += "<h4>Select Hardware for Condition " + num + "</h4>";
+                newTag += "<select onchange=\"conCon(" + num + ")\" ";
+                newTag += "id=\"conHarSelect" + num + "\">";
+                newTag += "<option selected disabled hidden style='display: none' value=''></option>";
+
+                for (count = 0; count < JSONtext.length; count++)
+                {
+                    newTag += "<option>";
+                    newTag += JSONtext[count].Name;
+                    newTag += "</option>";
+                }
+
+                newTag += "</select>";
+
+                conHar.innerHTML += newTag;
+
+            }
+
+            function conCon(num)
+            {
+
+                var conCon = document.getElementById("conCon" + num);
+                var e = document.getElementById("conHarSelect" + num);
+                var value = e.options[e.selectedIndex].text;
+                var newTag = "";
+                var count;
+                var index;
+
+                for (count = 0; count < JSONtext.length; count++)
+                {
+                    if (JSONtext[count].Name == value)
+                    {
+                        index = count;
+                    }
+                }
+
+                conCon.innerHTML = "";
+                document.getElementById("conInp" + num).innerHTML = "";
+
+                newTag += "<h4>Select Condition " + num + "</h4>";
+                newTag += "<select onchange=\"conInp(" + num + ")\" ";
+                newTag += "id=\"conConSelect" + num + "\">"
+                newTag += "<option selected disabled hidden style='display: none' value=''></option>";
+
+                for (count = 0; count < JSONtext[index].Conditions.length; count++)
+                {
+                    newTag += "<option>";
+                    newTag += JSONtext[index].Conditions[count].Name;
+                    newTag += "</option>";
+                }
+
+                newTag += "</select>";
+
+                conCon.innerHTML += newTag;
+
+            }
+
+            function conInp(num)
+            {
+
+                var conInp = document.getElementById("conInp" + num);
+                var e = document.getElementById("conConSelect" + num);
+                var value = e.options[e.selectedIndex].text;
+                var newTag = "";
+                var count1, count2;
+                var index1, index2;
+
+                for (count1 = 0; count1 < JSONtext.length; count1++)
+                {
+                    for (count2 = 0; count2 < JSONtext[count1].Conditions.length; count2++)
+                    {
+                        if (JSONtext[count1].Conditions[count2].Name == value)
+                        {
+                            index1 = count1;
+                            index2 = count2;
+                        }
+                    }
+                }
+
+                conInp.innerHTML = "";
+
+                newTag += "<h4>Fill Out Inputs</h4>";
+
+                newTag += "<form>";
+
+                for (var key in JSONtext[index1].Conditions[index2].Inputs)
+                {
+
+                    newTag += key
+
+                    if (JSONtext[index1].Conditions[index2].Inputs[key] == "INT")
+                    {
+                        newTag += "<input type=\"number\"/>";
+                    }
+                    else if (JSONtext[index1].Conditions[index2].Inputs[key] == "FLOAT")
+                    {
+                        newTag += "<input type=\"number\" step=\"0.01\"/>";
+                    }
+                    else
+                    {
+                        newTag += "<input type=\"text\"/>";
+                    }
+
+                    newTag += "<br>";
+
+                }
+
+                newTag += "</form>";
+
+                conInp.innerHTML += newTag;
+
+            }
+
+            function actHar(num)
+            {
+
+                var actHar = document.getElementById("actHar" + num);
+                var newTag = "";
+                var count;
+
+                newTag += "<h4>Select Hardware for Action " + num + "</h4>";
+                newTag += "<select onchange=\"actAct(" + num + ")\" ";
+                newTag += "id=\"actHarSelect" + num + "\">";
+                newTag += "<option selected disabled hidden style='display: none' value=''></option>";
+
+
+                for (count = 0; count < JSONtext.length; count++)
+                {
+                    newTag += "<option>";
+                    newTag += JSONtext[count].Name;
+                    newTag += "</option>";
+                }
+                newTag += "</select>";
+
+                actHar.innerHTML += newTag;
+
+            }
+
+            function actAct(num)
+            {
+
+                var actCon = document.getElementById("actCon" + num);
+                var e = document.getElementById("actHarSelect" + num);
+                var value = e.options[e.selectedIndex].text;
+                var newTag = "";
+                var count;
+                var index;
+
+                for (count = 0; count < JSONtext.length; count++)
+                {
+                    if (JSONtext[count].Name == value)
+                    {
+                        index = count;
+                    }
+                }
+
+                actCon.innerHTML = "";
+                document.getElementById("actInp" + num).innerHTML = "";
+
+                newTag += "<h4>Select Action " + num + "</h4>";
+                newTag += "<select onchange=\"actInp(" + num + ")\" ";
+                newTag += "id=\"actActSelect" + num + "\">";
+                newTag += "<option selected disabled hidden style='display: none' value=''></option>";
+
+                for (count = 0; count < JSONtext[index].Actions.length; count++)
+                {
+                    newTag += "<option>";
+                    newTag += JSONtext[index].Actions[count].Name;
+                    newTag += "</option>";
+                }
+
+                newTag += "</select>";
+
+                actCon.innerHTML += newTag;
+
+            }
+
+            function actInp(num)
+            {
+
+                var actInp = document.getElementById("actInp" + num);
+                var e = document.getElementById("actActSelect" + num);
+                var value = e.options[e.selectedIndex].text;
+                var newTag = "";
+                var count1, count2;
+                var index1, index2;
+
+                for (count1 = 0; count1 < JSONtext.length; count1++)
+                {
+                    for (count2 = 0; count2 < JSONtext[count1].Actions.length; count2++)
+                    {
+                        if (JSONtext[count1].Actions[count2].Name == value)
+                        {
+                            index1 = count1;
+                            index2 = count2;
+                        }
+                    }
+                }
+
+                actInp.innerHTML = "";
+
+                newTag += "<h4>Fill Out Inputs</h4>";
+
+                newTag += "<form>";
+
+                for (var key in JSONtext[index1].Actions[index2].Inputs)
+                {
+
+                    newTag += key
+
+                    if (JSONtext[index1].Actions[index2].Inputs[key] == "INT")
+                    {
+                        newTag += "<input type=\"number\"/>";
+                    }
+                    else if (JSONtext[index1].Actions[index2].Inputs[key] == "FLOAT")
+                    {
+                        newTag += "<input type=\"number\" step=\"0.01\"/>";
+                    }
+                    else
+                    {
+                        newTag += "<input type=\"text\"/>";
+                    }
+
+                    newTag += "<br>";
+
+                }
+
+                newTag += "</form>";
+
+                 actInp.innerHTML += newTag;
+
+            }
+
+        </script>
+
+</body>
+
+</html>
