@@ -15,53 +15,65 @@
 
 <body>
 
+    <!-- Div for the header bar -->
     <div id="header">
 
         <img src="images/Logo.png"/>
 
     </div>
 
+    <!-- Div for the main content body -->
     <div id="main">
 
         <h1>Vulcan Scheduler</h1>
 
+        <!-- All generated tags are placed into this paragraph tag -->
         <p id="body"></p>
 
+        <!-- Button to add new actions -->
         <button onclick="newIns()">Add New Instruction</button>
 
         <br>
         <br>
 
-        <button>Submit</button>
+        <!-- Button to finalize all instruction inputs -->
+        <button onclick="writeToFile()">Submit</button>
 
     </div>
 
+        <!-- JavaScript -->
         <script>
 
+            // Instruction counter and JSON text variables
             var insNum = 0;
-
-            // No clue how this whole thing works, but it loads the json file
             var JSONtext;
 
+            // No Idea how this works, but it loads the JSON file into the var
             loadJSON(function(response) {
                 JSONtext = JSON.parse(response);
             });
 
-            function loadJSON(callback) {
+            function loadJSON(callback)
+            {
 
                 var xobj = new XMLHttpRequest();
-                    xobj.overrideMimeType("application/json");
-                xobj.open('GET', 'Hardware.json', true); // Replace 'my_data' with the path to your file
+
+                xobj.overrideMimeType("application/json");
+                xobj.open('GET', 'Hardware.json', true);
                 xobj.onreadystatechange = function () {
+
                       if (xobj.readyState == 4 && xobj.status == "200") {
-                        // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
                         callback(xobj.responseText);
+
                       }
+
                 };
+
                 xobj.send(null);
+
             }
 
-            // Code I actually wrote
+            // Creates all HTML tags needed to hold instruction entering
             function newIns()
             {
 
@@ -79,7 +91,7 @@
                 newTag += "<p id=\"actCon" + insNum + "\" num=\"" + insNum + "\"></p>";
                 newTag += "<p id=\"actInp" + insNum + "\" num=\"" + insNum + "\"></p>";
 
-                newTag += "<p>==========</p>";
+                newTag += "<p>====================</p>";
 
                 document.getElementById("body").innerHTML += newTag;
 
@@ -88,6 +100,7 @@
 
             }
 
+            // Reads hardware from the JSON are creates a select tag with it
             function conHar(num)
             {
 
@@ -113,6 +126,8 @@
 
             }
 
+            // Reads the input from the hardware selection and creates a
+            // select tag with the available conditions
             function conCon(num)
             {
 
@@ -152,6 +167,8 @@
 
             }
 
+            // Reads the input from the condition selection and creates a select
+            // tag with the needed inputs
             function conInp(num)
             {
 
@@ -208,6 +225,7 @@
 
             }
 
+            // Reads hardware from the JSON and creates a select tag with it
             function actHar(num)
             {
 
@@ -233,6 +251,8 @@
 
             }
 
+            // Reads the input from the hardware selection and creates a
+            // select tag with the available actions
             function actAct(num)
             {
 
@@ -272,6 +292,8 @@
 
             }
 
+            // Reads the input from the action selection and creates a select
+            // tag with the needed inputs
             function actInp(num)
             {
 
@@ -325,6 +347,13 @@
                 newTag += "</form>";
 
                  actInp.innerHTML += newTag;
+
+            }
+
+            // Not finished yet. Will call the necessary PHP functions to write
+            // to a file and allow the user to download it
+            function writeToFile()
+            {
 
             }
 
