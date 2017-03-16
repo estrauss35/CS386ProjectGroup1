@@ -18,6 +18,7 @@
     <!-- Div for the header bar -->
     <div id="header">
 
+        <!-- Add image to header bar -->
         <img src="images/Logo.png"/>
 
     </div>
@@ -79,22 +80,29 @@
 
                 var newTag = "";
 
+                // Increment the instruction number
                 insNum++;
 
+                // Add a label for the instruction
                 newTag += "<h3>Instruction " + insNum + "</h3>";
 
+                // Add p tags to hold condition tags
                 newTag += "<p id=\"conHar" + insNum + "\" num=\"" + insNum + "\"></p>";
                 newTag += "<p id=\"conCon" + insNum + "\" num=\"" + insNum + "\"></p>";
                 newTag += "<p id=\"conInp" + insNum + "\" num=\"" + insNum + "\"></p>";
 
+                // Add p tags to hold action tags
                 newTag += "<p id=\"actHar" + insNum + "\" num=\"" + insNum + "\"></p>";
-                newTag += "<p id=\"actCon" + insNum + "\" num=\"" + insNum + "\"></p>";
+                newTag += "<p id=\"actAct" + insNum + "\" num=\"" + insNum + "\"></p>";
                 newTag += "<p id=\"actInp" + insNum + "\" num=\"" + insNum + "\"></p>";
 
+                // Seperator for between instructions
                 newTag += "<p>====================</p>";
 
+                // Add our new tag to the body
                 document.getElementById("body").innerHTML += newTag;
 
+                // Call the functions to get the hardware select menus
                 conHar(insNum);
                 actHar(insNum);
 
@@ -108,11 +116,15 @@
                 var newTag = "";
                 var count;
 
+                // Create a label for the hardware selection
                 newTag += "<h4>Select Hardware for Condition " + num + "</h4>";
+
+                // Open the select tag
                 newTag += "<select onchange=\"conCon(" + num + ")\" ";
                 newTag += "id=\"conHarSelect" + num + "\">";
                 newTag += "<option selected disabled hidden style='display: none' value=''></option>";
 
+                // Populate the select tag with hardware from the JSON
                 for (count = 0; count < JSONtext.length; count++)
                 {
                     newTag += "<option>";
@@ -120,8 +132,10 @@
                     newTag += "</option>";
                 }
 
+                // Close the select tag
                 newTag += "</select>";
 
+                // Add our new tag to the condition hardware tag
                 conHar.innerHTML += newTag;
 
             }
@@ -132,12 +146,16 @@
             {
 
                 var conCon = document.getElementById("conCon" + num);
+
+                // Get the text selected from the hardware select tag
                 var e = document.getElementById("conHarSelect" + num);
                 var value = e.options[e.selectedIndex].text;
+
                 var newTag = "";
                 var count;
                 var index;
 
+                // Find the index in the JSON that the hardware is located
                 for (count = 0; count < JSONtext.length; count++)
                 {
                     if (JSONtext[count].Name == value)
@@ -146,14 +164,17 @@
                     }
                 }
 
+                // Clear HTML from previous hardware and condition selections
                 conCon.innerHTML = "";
                 document.getElementById("conInp" + num).innerHTML = "";
 
+                // Open the select tag for the condition select
                 newTag += "<h4>Select Condition " + num + "</h4>";
                 newTag += "<select onchange=\"conInp(" + num + ")\" ";
                 newTag += "id=\"conConSelect" + num + "\">"
                 newTag += "<option selected disabled hidden style='display: none' value=''></option>";
 
+                // Populate the select with conditions from the JSON
                 for (count = 0; count < JSONtext[index].Conditions.length; count++)
                 {
                     newTag += "<option>";
@@ -161,8 +182,10 @@
                     newTag += "</option>";
                 }
 
+                // Close the condition select
                 newTag += "</select>";
 
+                // Add our new tag to the condition select tag
                 conCon.innerHTML += newTag;
 
             }
@@ -173,12 +196,17 @@
             {
 
                 var conInp = document.getElementById("conInp" + num);
+
+                // Get the text selected from the condition select tag
                 var e = document.getElementById("conConSelect" + num);
                 var value = e.options[e.selectedIndex].text;
+
                 var newTag = "";
                 var count1, count2;
                 var index1, index2;
 
+                // Get the indexes where the hardware and condition are located
+                // in the JSON file
                 for (count1 = 0; count1 < JSONtext.length; count1++)
                 {
                     for (count2 = 0; count2 < JSONtext[count1].Conditions.length; count2++)
@@ -191,17 +219,23 @@
                     }
                 }
 
+                // Clear previously selected inputs
                 conInp.innerHTML = "";
 
+                // Create a label for the input field
                 newTag += "<h4>Fill Out Inputs</h4>";
 
+                // Open the form tag for our inputs
                 newTag += "<form>";
 
+                // Loop through each input in the condition
                 for (var key in JSONtext[index1].Conditions[index2].Inputs)
                 {
 
+                    // Add the key name
                     newTag += key
 
+                    // Add the corresponding tag based on the type of input
                     if (JSONtext[index1].Conditions[index2].Inputs[key] == "INT")
                     {
                         newTag += "<input type=\"number\"/>";
@@ -215,12 +249,15 @@
                         newTag += "<input type=\"text\"/>";
                     }
 
+                    // Add a line break
                     newTag += "<br>";
 
                 }
 
+                // Close the form tag
                 newTag += "</form>";
 
+                // Add our new tag to the condition input tag
                 conInp.innerHTML += newTag;
 
             }
@@ -233,20 +270,26 @@
                 var newTag = "";
                 var count;
 
+                // Create a label for the action selection
                 newTag += "<h4>Select Hardware for Action " + num + "</h4>";
+
+                // Open the select tag
                 newTag += "<select onchange=\"actAct(" + num + ")\" ";
                 newTag += "id=\"actHarSelect" + num + "\">";
                 newTag += "<option selected disabled hidden style='display: none' value=''></option>";
 
-
+                // Populate the select tag with the hardware from the JSON
                 for (count = 0; count < JSONtext.length; count++)
                 {
                     newTag += "<option>";
                     newTag += JSONtext[count].Name;
                     newTag += "</option>";
                 }
+
+                // Close the select tag
                 newTag += "</select>";
 
+                // Add our new tag to the action hardware tag
                 actHar.innerHTML += newTag;
 
             }
@@ -256,13 +299,17 @@
             function actAct(num)
             {
 
-                var actCon = document.getElementById("actCon" + num);
+                var actAct = document.getElementById("actAct" + num);
+
+                // Get the text selected from the hardware select tag
                 var e = document.getElementById("actHarSelect" + num);
                 var value = e.options[e.selectedIndex].text;
+
                 var newTag = "";
                 var count;
                 var index;
 
+                // Find the index in the JSON that the hardware is located
                 for (count = 0; count < JSONtext.length; count++)
                 {
                     if (JSONtext[count].Name == value)
@@ -271,14 +318,17 @@
                     }
                 }
 
-                actCon.innerHTML = "";
+                // Clear HTML from previous hardware and action selections
+                actAct.innerHTML = "";
                 document.getElementById("actInp" + num).innerHTML = "";
 
+                // Open the select tag for the action select
                 newTag += "<h4>Select Action " + num + "</h4>";
                 newTag += "<select onchange=\"actInp(" + num + ")\" ";
                 newTag += "id=\"actActSelect" + num + "\">";
                 newTag += "<option selected disabled hidden style='display: none' value=''></option>";
 
+                // Populate the select with actions from the JSON
                 for (count = 0; count < JSONtext[index].Actions.length; count++)
                 {
                     newTag += "<option>";
@@ -286,9 +336,11 @@
                     newTag += "</option>";
                 }
 
+                // Close the action select
                 newTag += "</select>";
 
-                actCon.innerHTML += newTag;
+                // Add our new tag to the action select tag
+                actAct.innerHTML += newTag;
 
             }
 
@@ -298,12 +350,18 @@
             {
 
                 var actInp = document.getElementById("actInp" + num);
+
+                // Get the text selected from the action select tag
                 var e = document.getElementById("actActSelect" + num);
                 var value = e.options[e.selectedIndex].text;
+
+
                 var newTag = "";
                 var count1, count2;
                 var index1, index2;
 
+                // Get the indexes where the hardware and action are located in
+                // the JSON file
                 for (count1 = 0; count1 < JSONtext.length; count1++)
                 {
                     for (count2 = 0; count2 < JSONtext[count1].Actions.length; count2++)
@@ -316,17 +374,23 @@
                     }
                 }
 
+                // Clear previously selected inputs
                 actInp.innerHTML = "";
 
+                // Create a label for the input field
                 newTag += "<h4>Fill Out Inputs</h4>";
 
+                // Open the form tag for our inputs
                 newTag += "<form>";
 
+                // Loop through each input in the action
                 for (var key in JSONtext[index1].Actions[index2].Inputs)
                 {
 
+                    // Add the key name
                     newTag += key
 
+                    // Add the corresponding tag based on the type of input
                     if (JSONtext[index1].Actions[index2].Inputs[key] == "INT")
                     {
                         newTag += "<input type=\"number\"/>";
@@ -340,13 +404,16 @@
                         newTag += "<input type=\"text\"/>";
                     }
 
+                    // Add a line break
                     newTag += "<br>";
 
                 }
 
+                // Close the form tag
                 newTag += "</form>";
 
-                 actInp.innerHTML += newTag;
+                // Add our new tag to the action input tag
+                actInp.innerHTML += newTag;
 
             }
 

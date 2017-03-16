@@ -3,65 +3,65 @@
     "Conditions":
     [
         {
-            "Name":"HW_1_Condition_1",
+            "Name":"Hw_1_Con_1",
             "Inputs":
             {
-                "Hours":"INT",
-                "Minutes":"INT",
-                "Seconds":"INT"
+                "Hw_1_Con_1_Inp_1_INT":"INT",
+                "Hw_1_Con_1_Inp_2_FLOAT":"FLOAT",
+                "Hw_1_Con_1_Inp_3_STRING":"STRING"
             }
         },
         {
-            "Name":"HW_1_Condition_2",
+            "Name":"Hw_1_Con_2",
             "Inputs":
             {
-                "Size":"INT",
-                "Weight":"INT"
+                "Hw_1_Con_2_Inp_1_INT":"INT",
+                "Hw_1_Con_2_Inp_2_INT":"INT"
             }
         },
         {
-            "Name":"HW_1_Condition_3",
+            "Name":"Hw_1_Con_3",
             "Inputs":
             {
-                "Float Weight":"FLOAT",
-                "String Text":"STRING"
+                "Hw_1_Con_3_Inp_1_FLOAT":"FLOAT",
+                "Hw_1_Con_3_Inp_2_STRING":"STRING"
             }
         }
     ],
     "Actions":
     [
         {
-            "Name":"Heat To",
+            "Name":"Hw_1_Act_1",
             "Inputs":
             {
-                "Temp":"INT"
+                "Hw_1_Act_1_Inp_1_FLOAT":"FLOAT"
             }
         },
         {
-            "Name":"Heat For",
+            "Name":"Hw_1_Act_2",
             "Inputs":
             {
-                "Temp":"INT",
-                "Seconds":"INT"
+                "Hw_1_Act_2_Inp_1_INT":"INT",
+                "Hw_1_Act_2_Inp_2_INT":"INT"
             }
         },
         {
-            "Name":"Heat Cycle",
+            "Name":"Hw_1_Act_3",
             "Inputs":
             {
-                "Temp1":"INT",
-                "Temp2":"INT",
-                "Seconds":"INT"
+                "Hw_1_Act_3_Inp_1_INT":"INT",
+                "Hw_1_Act_3_Inp_2_INT":"INT",
+                "Hw_1_Act_3_Inp_3_STRING":"STRING"
             }
         }
     ]
 },
 {
-    "Name":"Hardware_2",
+    "Name":"Liquid Heater/Cooler",
     "Conditions":
     [
         {
-            "Name":"HW_2_Condition_1",
+            "Name":"At time",
             "Inputs":
             {
                 "Hours":"INT",
@@ -70,45 +70,43 @@
             }
         },
         {
-            "Name":"HW_2_Condition_2",
+            "Name":"At temperature",
             "Inputs":
             {
-                "Size":"INT",
-                "Weight":"INT"
+                "Temp":"FLOAT"
             }
         },
         {
-            "Name":"HW_2_Condition_3",
+            "Name":"When message received",
             "Inputs":
             {
-                "Seconds":"INT"
+                "Message":"STRING"
             }
         }
     ],
     "Actions":
     [
         {
-            "Name":"Cool To",
+            "Name":"Cool liquid to",
             "Inputs":
             {
                 "Temp":"INT"
             }
         },
         {
-            "Name":"Cool For",
+            "Name":"Heat liquid to",
             "Inputs":
             {
-                "Temp":"INT",
-                "Seconds":"INT"
+                "Temp":"INT"
             }
         },
         {
-            "Name":"Test Inputs",
+            "Name":"Cycle temp between",
             "Inputs":
             {
-                "Int Input":"INT",
-                "Float Input":"FLOAT",
-                "Text Input":"STRING"
+                "Max temp":"FLOAT",
+                "Min temp":"FLOAT",
+                "Seconds":"INT"
             }
         }
     ]
