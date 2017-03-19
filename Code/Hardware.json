@@ -8,7 +8,8 @@
             {
                 "Hw_1_Con_1_Inp_1_INT":"INT",
                 "Hw_1_Con_1_Inp_2_FLOAT":"FLOAT",
-                "Hw_1_Con_1_Inp_3_STRING":"STRING"
+                "Hw_1_Con_1_Inp_3_STRING":"STRING",
+                "Hw_1_Con_1_Inp_4_BOOL":"BOOL"
             }
         },
         {
@@ -16,7 +17,7 @@
             "Inputs":
             {
                 "Hw_1_Con_2_Inp_1_INT":"INT",
-                "Hw_1_Con_2_Inp_2_INT":"INT"
+                "Hw_1_Con_2_Inp_2_BOOL":"BOOL"
             }
         },
         {
@@ -42,7 +43,7 @@
             "Inputs":
             {
                 "Hw_1_Act_2_Inp_1_INT":"INT",
-                "Hw_1_Act_2_Inp_2_INT":"INT"
+                "Hw_1_Act_2_Inp_2_BOOL":"BOOL"
             }
         },
         {
@@ -50,7 +51,7 @@
             "Inputs":
             {
                 "Hw_1_Act_3_Inp_1_INT":"INT",
-                "Hw_1_Act_3_Inp_2_INT":"INT",
+                "Hw_1_Act_3_Inp_2_BOOL":"BOOL",
                 "Hw_1_Act_3_Inp_3_STRING":"STRING"
             }
         }

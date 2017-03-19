@@ -244,9 +244,17 @@
                     {
                         newTag += "<input type=\"number\" step=\"0.01\"/>";
                     }
-                    else
+                    else if (JSONtext[index1].Conditions[index2].Inputs[key] == "STRING")
                     {
                         newTag += "<input type=\"text\"/>";
+                    }
+                    else
+                    {
+                        newTag += "<select>";
+                        newTag += "<option selected disabled hidden style='display: none' value=''></option>";
+                        newTag += "<option>True</option>";
+                        newTag += "<option>False</option>";
+                        newTag += "</select>";
                     }
 
                     // Add a line break
@@ -399,9 +407,17 @@
                     {
                         newTag += "<input type=\"number\" step=\"0.01\"/>";
                     }
-                    else
+                    else if (JSONtext[index1].Actions[index2].Inputs[key] == "STRING")
                     {
                         newTag += "<input type=\"text\"/>";
+                    }
+                    else
+                    {
+                        newTag += "<select>";
+                        newTag += "<option selected disabled hidden style='display: none' value=''></option>";
+                        newTag += "<option>True</option>";
+                        newTag += "<option>False</option>";
+                        newTag += "</select>";
                     }
 
                     // Add a line break
