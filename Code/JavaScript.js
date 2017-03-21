@@ -391,4 +391,37 @@ function actInp(num)
 function writeToFile()
 {
 
+    // Get all the inputs
+
+    /*
+    This can be done by getting the inner HTML of the body tag and looping
+    through each instruction in it. The HTML can then be parsed for values.
+    Each value should be placed into double array where the outer array is the
+    instructions and the inner arrays are the values associated with those
+    instructions.
+    */
+
+    // Check if any of the inputs are NULL
+
+    /*
+    Simply loop through the double array and check to make sure each value is
+    not NULL.
+    */
+
+
+    // Parse the inputs into JSON text
+
+    /*
+    I do not have info on how to structure our outer JSON yet, so we don't need
+    to worry about this part yet.
+    */
+
+    // Write the text to a file
+
+    /*
+    This will most likely have to be done by writting it to a file on the server
+    and then allowing the user to download the file. PHP will most likely have
+    to be used here, I just don't know how yey.
+    */
+
 }
