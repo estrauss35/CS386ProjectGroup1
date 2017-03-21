@@ -425,3 +425,35 @@ function writeToFile()
     */
 
 }
+
+// Loops through the inputs parsed from the HTML and checks to makes sure none
+// of them were empty. Returns true if none are empty, and false if at least
+// one is.
+function checkEmptyInputs(inputs)
+{
+
+    var count1;
+    var count2;
+
+    // Loop through the outer array
+    for (count1 = 0; count1 < insNum; count1++)
+    {
+
+        // Loop through the inner array
+        for (count2 = 0; count2 < inputs[count1].length; count2++)
+        {
+
+            // Check is the value is null
+            if (inputs[count1][count2] == null)
+            {
+                return false;
+            }
+
+        }
+
+    }
+
+    // If no values were null, return true
+    return true;
+
+}
