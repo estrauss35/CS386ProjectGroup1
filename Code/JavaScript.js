@@ -391,69 +391,86 @@ function actInp(num)
 function writeToFile()
 {
 
+    var inputs = [];
+    var e;
+    var value;
+    var count;
+    var index;
+
+    index = 0;
+
     // Get all the inputs
+    for (count = 1; count <= insNum; count++)
+    {
 
-    /*
-    This can be done by getting the inner HTML of the body tag and looping
-    through each instruction in it. The HTML can then be parsed for values.
-    Each value should be placed into double array where the outer array is the
-    instructions and the inner arrays are the values associated with those
-    instructions.
-    */
+        // Get the condition hardware name
+        e = document.getElementById("conHarSelect" + count);
+        value = e.options[e.selectedIndex].text;
+        inputs[index++] = value;
 
-    // Check if any of the inputs are NULL
+        // Get the condition input values
 
-    /*
-    Simply loop through the double array and check to make sure each value is
-    not NULL.
-    */
+        // Get the action hardware name
+        e = document.getElementById("actHarSelect" + count);
+        value = e.options[e.selectedIndex].text;
+        inputs[index++] = value;
 
+        // get the action input values
+
+    }
+
+    // Check if any of the inputs are empty
+    if (emptyInputs(inputs))
+    {
+        alert("Please fill in all inputs");
+        return;
+    }
+
+    alert(arrayToString(inputs));
 
     // Parse the inputs into JSON text
 
-    /*
-    I do not have info on how to structure our outer JSON yet, so we don't need
-    to worry about this part yet.
-    */
 
     // Write the text to a file
 
-    /*
-    This will most likely have to be done by writting it to a file on the server
-    and then allowing the user to download the file. PHP will most likely have
-    to be used here, I just don't know how yey.
-    */
 
 }
 
 // Loops through the inputs parsed from the HTML and checks to makes sure none
-// of them were empty. Returns true if none are empty, and false if at least
+// of them were empty. Returns false if none are empty, and true if at least
 // one is.
-function checkEmptyInputs(inputs)
+function emptyInputs(inputs)
 {
 
-    var count1;
-    var count2;
+    var count;
 
-    // Loop through the outer array
-    for (count1 = 0; count1 < insNum; count1++)
+    for (count = 0; count < inputs.length; count++)
     {
-
-        // Loop through the inner array
-        for (count2 = 0; count2 < inputs[count1].length; count2++)
+        if (inputs[count] == "")
         {
-
-            // Check is the value is null
-            if (inputs[count1][count2] == null)
-            {
-                return false;
-            }
-
+            return true;
         }
-
     }
 
-    // If no values were null, return true
-    return true;
+    return false;
+
+}
+
+function arrayToString(input)
+{
+    var output = "[";
+    var count;
+
+    for (count = 0; count < input.length; count++)
+    {
+        output += input[count];
+
+        if (count != input.length - 1)
+        {
+            output += " : ";
+        }
+    }
+
+    return output + "]";
 
 }
