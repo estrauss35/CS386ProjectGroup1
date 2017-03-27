@@ -386,8 +386,8 @@ function actInp(num)
 
 }
 
-// Not finished yet. Will call the necessary PHP functions to write
-// to a file and allow the user to download it
+// Gets all the input values from the HTML, checks for empty values, parses it
+// into the correct format, and places it in the output tag of the HTML.
 function writeToFile()
 {
 
@@ -396,6 +396,7 @@ function writeToFile()
     var innerInputsText = [];
     var e, value;
     var count1, count2, index;
+    var output;
 
     index = 0;
 
@@ -441,10 +442,10 @@ function writeToFile()
     }
 
     // Parse the inputs into JSON text
-
+    output = arrayToOutput(inputs);
 
     // Write the text to a file
-    document.getElementById("output").innerHTML = arrayToString(inputs);
+    document.getElementById("output").innerHTML = output;
 
 }
 
@@ -493,28 +494,45 @@ function emptyInputs(inputs)
 
 }
 
-function arrayToString(input)
+// Formats the input array into the final desired output
+function arrayToOutput(input)
 {
-    var output = "[";
-    var count;
+    var output;
+    var count1, count2;
 
-    for (count = 0; count < input.length; count++)
+    output = "[<br>";
+
+    // Loop through each value in the input
+    for (count1 = 0; count1 < input.length; count1 += 4)
     {
-        if (input[count] instanceof Array)
+
+        // Add the condition hardware name
+        output += input[count1] + ": ";
+
+        // Add the condition value array
+        for (count2 = 0; count2 < input[count1 + 1].length; count2++)
         {
-            output += arrayToString(input[count]);
-        }
-        else
-        {
-            output += input[count];
+            output += input[count1 + 1][count2] + " ";
         }
 
-        if (count != input.length - 1)
+        output += "<br>";
+
+        // Add the action hardware name
+        output += input[count1 + 2] + ": ";
+
+        // Add the action value array
+        for (count2 = 0; count2 < input[count1 + 3].length; count2++)
         {
-            output += " : ";
+            output += input[count1 + 3][count2] + " ";
         }
+
+        output += "<br>";
+
     }
 
-    return output + "]";
+    output += "]";
+
+    // Return the final result
+    return output;
 
 }
