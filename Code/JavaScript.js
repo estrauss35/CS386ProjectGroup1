@@ -179,7 +179,7 @@ function conInp(num)
     newTag += "<h4>Fill Out Inputs</h4>";
 
     // Open the form tag for our inputs
-    newTag += "<form>";
+    newTag += "<form id=\"conForm" + num + "\">";
 
     // Loop through each input in the condition
     for (var key in JSONtext[index1].Conditions[index2].Inputs)
@@ -342,7 +342,7 @@ function actInp(num)
     newTag += "<h4>Fill Out Inputs</h4>";
 
     // Open the form tag for our inputs
-    newTag += "<form>";
+    newTag += "<form id=\"actForm" + num + "\">";
 
     // Loop through each input in the action
     for (var key in JSONtext[index1].Actions[index2].Inputs)
@@ -392,30 +392,44 @@ function writeToFile()
 {
 
     var inputs = [];
-    var e;
-    var value;
-    var count;
-    var index;
+    var innerInputHTML = [];
+    var innerInputsText = [];
+    var e, value;
+    var count1, count2, index;
 
     index = 0;
 
     // Get all the inputs
-    for (count = 1; count <= insNum; count++)
+    for (count1 = 1; count1 <= insNum; count1++)
     {
 
         // Get the condition hardware name
-        e = document.getElementById("conHarSelect" + count);
+        e = document.getElementById("conHarSelect" + count1);
         value = e.options[e.selectedIndex].text;
         inputs[index++] = value;
 
         // Get the condition input values
+        innerInputsText = [];
+        innerInputHTML = document.getElementById("conForm" + count1).elements;
+        for (count2 = 0; count2 < innerInputHTML.length; count2++)
+        {
+            innerInputsText[count2] = innerInputHTML[count2].value;
+        }
+        inputs[index++] = innerInputsText;
 
         // Get the action hardware name
-        e = document.getElementById("actHarSelect" + count);
+        e = document.getElementById("actHarSelect" + count1);
         value = e.options[e.selectedIndex].text;
         inputs[index++] = value;
 
         // get the action input values
+        innerInputsText = [];
+        innerInputHTML = document.getElementById("actForm" + count1).elements;
+        for (count2 = 0; count2 < innerInputHTML.length; count2++)
+        {
+            innerInputsText[count2] = innerInputHTML[count2].value;
+        }
+        inputs[index++] = innerInputsText;
 
     }
 
@@ -426,32 +440,55 @@ function writeToFile()
         return;
     }
 
-    alert(arrayToString(inputs));
-
     // Parse the inputs into JSON text
 
 
     // Write the text to a file
-
+    document.getElementById("output").innerHTML = arrayToString(inputs);
 
 }
 
 // Loops through the inputs parsed from the HTML and checks to makes sure none
-// of them were empty. Returns false if none are empty, and true if at least
-// one is.
+// of them are empty. Returns false if none are empty, and true if at least one
+// is.
 function emptyInputs(inputs)
 {
 
-    var count;
+    var count1;
+    var count2;
 
-    for (count = 0; count < inputs.length; count++)
+    // Loop through the input array
+    for (count1 = 0; count1 < inputs.length; count1++)
     {
-        if (inputs[count] == "")
+
+        // If the value is another array
+        if (Array.isArray(inputs[count1]))
         {
-            return true;
+
+            // Loop through the inner array
+            for (count2 = 0; count2 < inputs[count1].length; count2++)
+            {
+
+                // If the value is empty, return true
+                if (inputs[count1][count2] == "")
+                {
+                    return true;
+                }
+
+            }
+        }
+        else
+        {
+
+            // If the value is empty, return true
+            if (inputs[count1] == "")
+            {
+                return true;
+            }
         }
     }
 
+    // Return false if no empty values were detected
     return false;
 
 }
@@ -463,7 +500,14 @@ function arrayToString(input)
 
     for (count = 0; count < input.length; count++)
     {
-        output += input[count];
+        if (input[count] instanceof Array)
+        {
+            output += arrayToString(input[count]);
+        }
+        else
+        {
+            output += input[count];
+        }
 
         if (count != input.length - 1)
         {

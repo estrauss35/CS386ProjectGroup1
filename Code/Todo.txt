@@ -2,7 +2,6 @@ Todo
 
  - Make it not look so ugly (expand the CSS file)
  - Fix bug where adding a new instruction clears previous inputs
- - Finish JavaScript (instructions can be found in file)
  - Thorough testing for bugs or inconsistencies
  - General code clean up. There is a lot of repeated code that could probably
    be condensed
