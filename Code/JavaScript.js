@@ -31,7 +31,12 @@ function loadJSON(callback)
 function newIns()
 {
 
-    var newTag = "";
+    var child;
+    var newTag;
+
+    // Initialize our HTML child and new tag
+    child = document.createElement("P");
+    newTag = "";
 
     // Increment the instruction number
     insNum++;
@@ -53,7 +58,8 @@ function newIns()
     newTag += "<p>====================</p>";
 
     // Add our new tag to the body
-    document.getElementById("body").innerHTML += newTag;
+    child.innerHTML = newTag;
+    document.getElementById("body").appendChild(child);
 
     // Call the functions to get the hardware select menus
     conHar(insNum);
