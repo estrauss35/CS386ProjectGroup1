@@ -2,7 +2,7 @@
 var insNum = 0;
 var JSONtext;
 
-// No Idea how this works, but it loads the JSON file into the var
+// No Idea how this works, but it loads the JSON file into the variable
 loadJSON(function(response) {
     JSONtext = JSON.parse(response);
 });
@@ -27,12 +27,18 @@ function loadJSON(callback)
 
 }
 
-// Creates all HTML tags needed to hold instruction entering
+/*
+ *  Name:        newIns
+ *  Description: Runs when the "Add New Instruction" button is clicked. Creates
+ *               several new tags that will be necessary to hold all the HTML
+ *               elements required when entering an instruction. Each of these
+ *               new tags are marked with an instruction number and then
+ *               appended to the "body" section of the webpage.
+ */
 function newIns()
 {
 
-    var child;
-    var newTag;
+    var child, newTag;
 
     // Initialize our HTML child and new tag
     child = document.createElement("P");
@@ -67,13 +73,20 @@ function newIns()
 
 }
 
-// Reads hardware from the JSON are creates a select tag with it
+/*
+ *  Name:        conHar
+ *  Description: Creates a select menu of hardware from the JSON file and places
+ *               it into the condition hardware tag that corresponds to the
+ *               number parameter.
+ */
 function conHar(num)
 {
 
-    var conHar = document.getElementById("conHar" + num);
-    var newTag = "";
-    var count;
+    var conHar, newTag, count;
+
+    // Fetch our condition hardware tag and initialize our new HTML tag
+    conHar = document.getElementById("conHar" + num);
+    newTag = "";
 
     // Create a label for the hardware selection
     newTag += "<h4>Select Hardware for Condition " + num + "</h4>";
@@ -99,20 +112,26 @@ function conHar(num)
 
 }
 
-// Reads the input from the hardware selection and creates a
-// select tag with the available conditions
+/*
+ *  Name:        conCon
+ *  Description: Creates a select menu of conditions from the JSON file and
+ *               places it into the condition condition tag that corresponds to
+ *               the number parameter.
+ */
 function conCon(num)
 {
 
-    var conCon = document.getElementById("conCon" + num);
+    var conCon;
+    var e, value, newTag;
+    var count, index;
+
+    // Fetch our condition tag and initialize our new HTML tag
+    conCon = document.getElementById("conCon" + num);
+    newTag = "";
 
     // Get the text selected from the hardware select tag
-    var e = document.getElementById("conHarSelect" + num);
-    var value = e.options[e.selectedIndex].text;
-
-    var newTag = "";
-    var count;
-    var index;
+    e = document.getElementById("conHarSelect" + num);
+    value = e.options[e.selectedIndex].text;
 
     // Find the index in the JSON that the hardware is located
     for (count = 0; count < JSONtext.length; count++)
@@ -149,20 +168,27 @@ function conCon(num)
 
 }
 
-// Reads the input from the condition selection and creates a select
-// tag with the needed inputs
+/*
+ *  Name:        conInp
+ *  Description: Creates a form of inputs specified in the JSON file and places
+ *               it in the condition input tag that corresponds to the number
+ *               parameter.
+ */
 function conInp(num)
 {
 
-    var conInp = document.getElementById("conInp" + num);
-
-    // Get the text selected from the condition select tag
-    var e = document.getElementById("conConSelect" + num);
-    var value = e.options[e.selectedIndex].text;
-
-    var newTag = "";
+    var conInp;
+    var e, value, newTag;
     var count1, count2;
     var index1, index2;
+
+    // Fetch our condition input tag and initialize our new HTML tag
+    conInp = document.getElementById("conInp" + num);
+    newTag = "";
+
+    // Get the text selected from the condition select tag
+    e = document.getElementById("conConSelect" + num);
+    value = e.options[e.selectedIndex].text;
 
     // Get the indexes where the hardware and condition are located
     // in the JSON file
@@ -229,13 +255,20 @@ function conInp(num)
 
 }
 
-// Reads hardware from the JSON and creates a select tag with it
+/*
+ *  Name:        actHar
+ *  Description: Creates a select menu of hardware from the JSON file and places
+ *               it into the action hardware tag that corresponds to the number
+ *               parameter.
+ */
 function actHar(num)
 {
 
-    var actHar = document.getElementById("actHar" + num);
-    var newTag = "";
-    var count;
+    var actHar, newTag, count;
+
+    // Fetch our action hardware tag and initialize our new HTML tag
+    actHar = document.getElementById("actHar" + num);
+    newTag = "";
 
     // Create a label for the action selection
     newTag += "<h4>Select Hardware for Action " + num + "</h4>";
@@ -261,20 +294,26 @@ function actHar(num)
 
 }
 
-// Reads the input from the hardware selection and creates a
-// select tag with the available actions
+/*
+ *  Name:        actAct
+ *  Description: Creates a select menu of actions from the JSON fil and places
+ *               it into the action action tag that corresponds to the number
+ *               parameter.
+ */
 function actAct(num)
 {
 
-    var actAct = document.getElementById("actAct" + num);
+    var actAct;
+    var e, value, newTag;
+    var count, index;
+
+    // Fetch our action tag and initialize our new HTML tag
+    actAct = document.getElementById("actAct" + num);
+    newTag = "";
 
     // Get the text selected from the hardware select tag
-    var e = document.getElementById("actHarSelect" + num);
-    var value = e.options[e.selectedIndex].text;
-
-    var newTag = "";
-    var count;
-    var index;
+    e = document.getElementById("actHarSelect" + num);
+    value = e.options[e.selectedIndex].text;
 
     // Find the index in the JSON that the hardware is located
     for (count = 0; count < JSONtext.length; count++)
@@ -311,21 +350,27 @@ function actAct(num)
 
 }
 
-// Reads the input from the action selection and creates a select
-// tag with the needed inputs
+/*
+ *  Name:        actInp
+ *  Description: Creates a form of inputs specified in the JSON file and places
+ *               it in the action input tag that corresponds to the number
+ *               parameter.
+ */
 function actInp(num)
 {
 
-    var actInp = document.getElementById("actInp" + num);
+    var actInp;
+    var e, value, newTag;
+    var count1, count2;
+    var index2, index2;
+
+    // Fetch our action input tag and initialize our new HTML tag
+    actInp = document.getElementById("actInp" + num);
+    newTag = "";
 
     // Get the text selected from the action select tag
-    var e = document.getElementById("actActSelect" + num);
-    var value = e.options[e.selectedIndex].text;
-
-
-    var newTag = "";
-    var count1, count2;
-    var index1, index2;
+    e = document.getElementById("actActSelect" + num);
+    value = e.options[e.selectedIndex].text;
 
     // Get the indexes where the hardware and action are located in
     // the JSON file
@@ -392,8 +437,12 @@ function actInp(num)
 
 }
 
-// Gets all the input values from the HTML, checks for empty values, parses it
-// into the correct format, and places it in the output tag of the HTML.
+/*
+ *  Name:        writeToFile
+ *  Description: Parses the user inputs from the document's HTML, checks it for
+ *               any empty inputs, formats it correctly, and then outputs it to
+ *               the user.
+ */
 function writeToFile()
 {
 
@@ -455,14 +504,16 @@ function writeToFile()
 
 }
 
-// Loops through the inputs parsed from the HTML and checks to makes sure none
-// of them are empty. Returns false if none are empty, and true if at least one
-// is.
+/*
+ *  Name:        emptyInputs
+ *  Description: Loops through the array of inputs parsed from the HTML and
+ *               checks if any are empty. If any are empty, returns true, else
+ *               returns false.
+ */
 function emptyInputs(inputs)
 {
 
-    var count1;
-    var count2;
+    var count1, count2;
 
     // Loop through the input array
     for (count1 = 0; count1 < inputs.length; count1++)
@@ -500,11 +551,15 @@ function emptyInputs(inputs)
 
 }
 
-// Formats the input array into the final desired output
+/*
+ *  Name:        arrayToOutput
+ *  Description: Takes in an array of inputs parsed from the HTML file and
+ *               formats it into the appropriate output needed.
+ */
 function arrayToOutput(input)
 {
-    var output;
-    var count1, count2;
+
+    var output, count1, count2;
 
     output = "[<br>";
 
@@ -518,7 +573,7 @@ function arrayToOutput(input)
         // Add the condition value array
         for (count2 = 0; count2 < input[count1 + 1].length; count2++)
         {
-            output += input[count1 + 1][count2] + " ";
+                output += input[count1 + 1][count2] + " ";
         }
 
         output += "<br>";
@@ -529,7 +584,7 @@ function arrayToOutput(input)
         // Add the action value array
         for (count2 = 0; count2 < input[count1 + 3].length; count2++)
         {
-            output += input[count1 + 3][count2] + " ";
+                output += input[count1 + 3][count2] + " ";
         }
 
         output += "<br>";
