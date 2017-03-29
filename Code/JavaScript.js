@@ -48,7 +48,7 @@ function newIns()
     insNum++;
 
     // Add a label for the instruction
-    newTag += "<h3>Instruction " + insNum + "</h3>";
+    newTag += "<h2>Instruction " + insNum + "</h2>";
 
     // Add p tags to hold condition tags
     newTag += "<p id=\"conHar" + insNum + "\" num=\"" + insNum + "\"></p>";
@@ -61,7 +61,7 @@ function newIns()
     newTag += "<p id=\"actInp" + insNum + "\" num=\"" + insNum + "\"></p>";
 
     // Seperator for between instructions
-    newTag += "<p>====================</p>";
+    newTag += "<p>================================</p>";
 
     // Add our new tag to the body
     child.innerHTML = newTag;
