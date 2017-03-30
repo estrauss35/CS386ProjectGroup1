@@ -1,0 +1,29 @@
+1. As a casual web user I want responsive web pages
+
+    This feature is shown in how the page reacts to user input. When the user
+    clicks the button to add a new instruction, new HTML elements are generated.
+    The new elements even reflect the information included in the hardware json
+    file.
+
+2. As a microfluidic experiment designer I need to be able to write instructions
+   for many different types of hardware
+
+   This feature is shown in how the page adapts to whatever information is
+   present in the Hardware.json file.
+
+3. As an experiment designer, I want to be able to view all the instructions I
+   am writing concurrently
+
+   At the moment, you view all the instructions you are writing at the same time
+   since when you click "Add New Instruction" it appends the new form below the
+   current one instead of replacing it.
+
+   NOTE: There is currently a bug where clicking "Add New Instruction" removes
+   the inputs from the previous instructions. This is fixed in the most updated
+   version, so don't worry about it
+
+4. As a member of the Neptune project, I want the software associated with it to
+   carry the Neptune branding.
+
+   This is implemented by placing a header section at the top of the webpage
+   containing the Neptune logo and primary color

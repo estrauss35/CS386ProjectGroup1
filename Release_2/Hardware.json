@@ -1,0 +1,109 @@
+[{
+    "Name":"MessageController",
+    "Conditions":
+    [
+        {
+            "Name":"Message Received",
+            "Inputs":
+            {
+                "Message":"STRING"
+            }
+        }
+    ],
+    "Actions":
+    [
+        {
+            "Name":"Send Message",
+            "Inputs":
+            {
+                "Message":"STRING"
+            }
+        }
+    ]
+},
+{
+    "Name":"LiquidTempController",
+    "Conditions":
+    [
+        {
+            "Name":"At Temperature",
+            "Inputs":
+            {
+                "Temp":"FLOAT"
+            }
+        },
+        {
+            "Name":"Sits At Temperature",
+            "Inputs":
+            {
+                "Temp":"FLOAT",
+                "Hours":"INT",
+                "Minutes":"INT",
+                "Seconds":"INT"
+            }
+        }
+    ],
+    "Actions":
+    [
+        {
+            "Name":"Cool Liquid To",
+            "Inputs":
+            {
+                "Temp":"INT"
+            }
+        },
+        {
+            "Name":"Heat Liquid To",
+            "Inputs":
+            {
+                "Temp":"INT"
+            }
+        },
+        {
+            "Name":"Cycle Temp Between",
+            "Inputs":
+            {
+                "Max temp":"FLOAT",
+                "Min temp":"FLOAT",
+                "Seconds":"INT"
+            }
+        }
+    ]
+},
+{
+    "Name":"ChannelController",
+    "Conditions":
+    [
+        {
+            "Name":"Channel Open",
+            "Inputs":
+            {
+                "Channel Number":"INT"
+            }
+        },
+        {
+            "Name":"Channel Closed",
+            "Inputs":
+            {
+                "Channel Number":"INT"
+            }
+        }
+    ],
+    "Actions":
+    [
+        {
+            "Name":"Open Channel",
+            "Inputs":
+            {
+                "Channel Number":"INT"
+            }
+        },
+        {
+            "Name":"Close Channel",
+            "Inputs":
+            {
+                "Channel Number":"INT"
+            }
+        }
+    ]
+}]
