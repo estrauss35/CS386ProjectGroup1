@@ -6,22 +6,7 @@ body
 {
 
     margin: 0 auto;
-
-}
-
-#header
-{
-
-    width: 100%;
-    height: 10vh;
-    background-color: #B8EEF1;
-
-}
-
-#header img
-{
-
-    height: 10vh;
+    background-image: url("images/Wallpaper.png");
 
 }
 
@@ -30,7 +15,6 @@ body
 
     width: 100%;
     height: 90vh;
-    background-image: url("images/Wallpaper.png");
     background-color: #FFFFFF;
     overflow: auto;
     text-align: left;
@@ -40,4 +24,76 @@ body
 #main
 {
     text-align: center;
+}
+
+/* General navigation bar format */
+.navbar-default{
+    background: #B8EEF1;
+    height: 50px;
+}
+/* Neptune logo */
+#header-image{
+    height: 130%;
+    height: 130%
+}
+
+/* Center the div */
+.center{
+    text-align: center;
+    float: none;
+    margin-left:auto;
+    margin-right: auto;
+}
+
+/* Submit button when logging in */
+.login_footer > li{
+    float: right;
+    padding-left: 10px;
+    list-style-type: none;
+}
+
+/* Dropdown Button */
+.dropbtn {
+    background-color: #a9dfe2;
+    color: white;
+    padding: 13px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(127, 162, 164, 0.72);
+}
+
+.shift-left{
+    right: 0px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    background-color: #a9dfe2;
 }
