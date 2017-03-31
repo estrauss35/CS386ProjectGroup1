@@ -1,0 +1,13 @@
+- The signing in was tested on my localhost but whoever is hosting the website would just need to enter their
+    host, username, aand password.
+- The database would also need to be made but I just called it Vulcan
+- The database only has User.  The SQL below can be run in your database to create the table in the database.
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `first_name` varchar(64) NOT NULL,
+  `last_name` varchar(64) NOT NULL,
+  `email` varchar(128) NOT NULL,
+  `pass` varchar(64) NOT NULL,
+  `join_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
